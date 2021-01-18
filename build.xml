@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project name="havis.middleware.utils" default="publish">
+
+	<property file="${basedir}/build.properties" />
+
+	<import>
+		<url url="${ivy.url}/ant/default.xml" />
+	</import>
+
+	<target name="clean-cache">
+		<clean-cache />
+	</target>
+
+	<target name="clean-all">
+		<clean-all />
+	</target>
+
+	<target name="jar">
+		<compile dst="${build.dir.classes}">
+			<src path="${src.main.dir}" />
+		</compile>
+		<module-info />
+		<jar-bin />
+	</target>
+
+	<target name="prepare">
+		<prepare />
+	</target>
+
+	<target name="test" depends="jar, prepare">
+		<java classname="havis.middleware.utils.TestRunner" fork="true" failonerror="true" timeout="180000">
+			<jvmarg value="-Djmockit-coverage-output=html" />
+			<jvmarg value="-Djmockit-coverage-outputDir=${build.dir.test}/coverage-report" />
+			<jvmarg value="-Djmockit-coverage-srcDirs=${src.main.dir}" />
+			<classpath>
+				<path refid="build.classpath" />
+				<pathelement location="${build.dir.test.classes}" />
+				<pathelement location="${resources.dir.test.classpath}" />
+				<pathelement location="${resources.dir.classpath}" />
+				<pathelement location="${build.dir.classes}" />
+			</classpath>
+		</java>
+	</target>
+
+	<target name="deb" depends="jar">
+		<deb name="50_${basename}" />
+	</target>
+
+	<target name="publish" depends="deb" description="Publishes the JAR to the repository">
+		<publish app="false" />
+	</target>
+
+</project>

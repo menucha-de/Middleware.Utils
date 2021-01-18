@@ -1,0 +1,13 @@
+Bundle-Name: Ha-VIS Middleware Utils
+Bundle-SymbolicName: havis.middleware.utils
+Bundle-Version: 2.6.0
+Implementation-Version: 2.6
+Bundle-ManifestVersion: 2
+Bundle-Vendor: HARTING IT_SD
+Import-Package: 
+ javax.xml.bind
+Export-Package: 
+ havis.middleware.utils.data,
+ havis.middleware.utils.generic,
+ havis.middleware.utils.serialization,
+ havis.middleware.utils.threading
