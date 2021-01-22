@@ -43,6 +43,7 @@
 	</target>
 
 	<target name="deb" depends="jar">
+		<mkdir dir="${build.dir}/deb/usr/share/doc" />
 		<deb name="50_${basename}" />
 	</target>
 
